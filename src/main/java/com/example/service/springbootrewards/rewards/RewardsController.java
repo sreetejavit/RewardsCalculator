@@ -22,29 +22,17 @@ public class RewardsController {
 	private RewardsService rewardsService;
 
 	@GetMapping("/customers")
-	public ResponseEntity<List<Customer>> findAllCustomers() {
-		try {
-			List<Customer> customers = rewardsService.getCustomerAll();
-			return ResponseEntity.ok(customers); // 200 OK
-		} catch (Exception ex) {
-			if (ex instanceof NullPointerException) {
-				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-			}
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-		}
+	public ResponseEntity<?> findAllCustomers() {
+		List<Customer> customers = rewardsService.getCustomerAll();
+		return ResponseEntity.ok(customers); // 200 OK
 	}
 
 	@GetMapping("/customers/{id}")
-	public ResponseEntity<Customer> getCustomer(@PathVariable Integer id) {
-		try {
-			Optional<Customer> customer = rewardsService.getCustomerById(id);
-      return customer.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-		} catch (Exception ex) {
-			if (ex instanceof NullPointerException) {
-				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-			}
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-		}
+	public ResponseEntity<?> getCustomer(@PathVariable Integer id) {
+		Optional<Customer> customer = rewardsService.getCustomerById(id);
+		if (customer.isPresent())
+			return ResponseEntity.ok(customer.get());
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Customer not found.");
 	}
 }
 
