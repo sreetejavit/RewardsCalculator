@@ -7,7 +7,7 @@ public class MonthlyPoints {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY) // Use IDENTITY for auto-increment
-  private Long id;
+  private int id;
 
   @ManyToOne
   @JoinColumn(name = "customer_id") // Foreign key to Customer table
@@ -26,11 +26,11 @@ public class MonthlyPoints {
     this.points = points;
   }
 
-  public Long getId() {
+  public int getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(int id) {
     this.id = id;
   }
 

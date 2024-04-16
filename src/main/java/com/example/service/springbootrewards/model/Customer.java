@@ -1,9 +1,10 @@
 package com.example.service.springbootrewards.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
-import java.util.HashSet;
+import java.time.Month;
+import java.util.Map;
 import java.util.Set;
 
+import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +15,7 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import javax.persistence.Transient;
 
 @Entity
 @JsonPropertyOrder({"id", "name", "rewardPoints", "totalPurchases"})
@@ -28,10 +30,6 @@ public class Customer {
 	@OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private Set<CustomerTransaction> transactions;
 
-//	@JsonInclude
-//	@JsonProperty(access = Access.READ_ONLY)
-//	private Set<MonthlyPoints> monthlyPoints = new HashSet<>();
-
 	@JsonInclude
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY) // Mark as read-only for serialization
 	private Long rewardPoints;
@@ -39,6 +37,9 @@ public class Customer {
 	@JsonInclude
 	@JsonProperty(access = JsonProperty.Access.READ_ONLY) // Mark as read-only for serialization
 	private Double totalPurchases;
+
+	@Transient
+	private Map<String, Long> monthlyRewards;
 
 	public Customer() {
 	}
@@ -72,15 +73,6 @@ public class Customer {
 		this.transactions = transactions;
 	}
 
-//	public Set<MonthlyPoints> getMonthlyPoints() {
-//		return monthlyPoints;
-//	}
-//
-//	public void setMonthlyPoints(
-//			Set<MonthlyPoints> monthlyPoints) {
-//		this.monthlyPoints = monthlyPoints;
-//	}
-
 	public Long getRewardPoints() {
 		if (transactions == null || transactions.isEmpty()) {
 			return 0L;
@@ -93,6 +85,12 @@ public class Customer {
 			return 0d;
 		}
 		return transactions.stream().mapToDouble(CustomerTransaction::getTotal).sum();
+	}
+
+	public Map<String, Long> getMonthlyRewards() {
+    return transactions.stream().collect(Collectors.groupingBy(t-> Month.of(t.getSaveDate().getMonth() + 1).toString(),
+				Collectors.summingLong(CustomerTransaction::getPoints)));
+
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package com.example.service.springbootrewards.rewards;
 
-import com.example.service.springbootrewards.exceptions.CustomerNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;

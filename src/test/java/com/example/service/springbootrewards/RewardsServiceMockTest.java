@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import com.example.service.springbootrewards.model.Customer;
 import java.util.List;
 
+import javax.validation.constraints.Null;
 import org.junit.jupiter.api.Test;
 
 import com.example.service.springbootrewards.rewards.RewardsServiceMock;
@@ -24,9 +25,6 @@ public class RewardsServiceMockTest {
 		// Assert the expected size of the list
 		assertEquals(3, transactions.size(), "Transactions list should contain 3 elements");
 	}
-
-//	@InjectMocks
-//	private CustomerTransaction transaction;
 
 	@Mock
 	private Customer customer; // Mock Customer object
@@ -94,5 +92,23 @@ public class RewardsServiceMockTest {
 		// Call getPoints and assert
 		int points = transaction.getPoints();
 		assertEquals(52, points, "Points should be 100 for transaction above $100");
+	}
+
+	@Test
+	public void testGetPoints_CornerCaseWithNegative() {
+		// Set transaction to test Negatives
+		CustomerTransaction transaction = new CustomerTransaction(1, null, -101.0, "Purchase 2", new java.util.Date());
+		// Call getPoints and assert
+		int points = transaction.getPoints();
+		assertEquals(0, points, "Points should be 100 for transaction above $100");
+	}
+
+	@Test
+	public void testGetPoints_CornerCaseWithNull() {
+		// Set transaction to test null
+		CustomerTransaction transaction = new CustomerTransaction(1, null, null, "Purchase 2", new java.util.Date());
+		// Call getPoints and assert
+		int points = transaction.getPoints();
+		assertEquals(0, points, "Points should be 100 for transaction above $100");
 	}
 }

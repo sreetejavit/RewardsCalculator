@@ -84,6 +84,10 @@ public class CustomerTransaction implements Reward {
 	public int getPoints() {
     int points = 0;
 
+		if (this.total == null) {
+			return points;
+		}
+
 		if (this.total > 50 && this.total <= 100) {
 			points += (this.total.intValue() - 50);
 		}

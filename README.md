@@ -17,7 +17,8 @@ This is a Spring Boot application implementing a rewards service API. It allows 
 - Clone the project.
 - Ensure you have Maven or Gradle installed.
 - Run mvn clean install (or your preferred build command) to build the project.
-- Run the application using java -jar target/rewards-service-0.0.1-SNAPSHOT.jar (replace the filename with the actual generated JAR file name).
+- Run the application using java -jar target/rewards-calculator-0.0.1-SNAPSHOT.jar (replace the filename with the actual generated JAR file name).
+- From Browser connect to http://localhost:8080/<below end points\>
 
 ### API Endpoints:
 | Endpoint                       | Method | Description                          |
@@ -26,7 +27,7 @@ This is a Spring Boot application implementing a rewards service API. It allows 
 | /api/v1/rewards/customers/{id} | Get    | Retrieves a specific customer by ID. |
 
 ### Response Codes:
-| Code          | Description                         |
-|---------------|-------------------------------------|
-| 200 OK        | Success                             |
-| 404 Not Found | Failure(Customer/Resource not found |
+| Code          | Description                          |
+|---------------|--------------------------------------|
+| 200 OK        | Success                              |
+| 404 Not Found | Failure(Customer/Resource not found) |
