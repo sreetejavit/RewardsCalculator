@@ -27,7 +27,8 @@ This is a Spring Boot application implementing a rewards service API. It allows 
 | /api/v1/rewards/customers/{id} | Get    | Retrieves a specific customer by ID. |
 
 ### Response Codes:
-| Code          | Description                          |
-|---------------|--------------------------------------|
-| 200 OK        | Success                              |
-| 404 Not Found | Failure(Customer/Resource not found) |
+| Code             | Description                          |
+|------------------|--------------------------------------|
+| 200 OK           | Success                              |
+| 404 Not Found    | Failure(Customer/Resource not found) |
+| 500 Server Error | Internal Server Error                |
