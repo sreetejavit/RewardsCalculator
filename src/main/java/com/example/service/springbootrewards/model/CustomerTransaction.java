@@ -86,17 +86,12 @@ public class CustomerTransaction implements Reward {
 
 		if (this.total == null) {
 			return points;
-		}
-
-		if (this.total > 50 && this.total <= 100) {
+		} else if (this.total > 50 && this.total <= 100) {
 			points += (this.total.intValue() - 50);
-		}
-
-		if (this.total > 100) {
+		} else if (this.total > 100) {
 			points += 50;  //1 point for every dollar spent over $50
 			points += (this.total.intValue() - 100) * 2;  //2 points for every dollar spent over $100
 		}
-
 		return points;
 	}
 

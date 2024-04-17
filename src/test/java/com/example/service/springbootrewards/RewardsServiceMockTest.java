@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import com.example.service.springbootrewards.model.Customer;
 import java.util.List;
 
-import javax.validation.constraints.Null;
 import org.junit.jupiter.api.Test;
 
 import com.example.service.springbootrewards.rewards.RewardsServiceMock;
