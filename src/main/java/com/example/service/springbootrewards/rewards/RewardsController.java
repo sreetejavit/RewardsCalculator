@@ -37,7 +37,7 @@ public class RewardsController {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Customer not found.");
 	}
 
-	@PostMapping
+	@PostMapping("/customers")
 	public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
 		Customer savedCustomer = rewardsService.saveCustomer(customer);
 		return new ResponseEntity<>(savedCustomer, HttpStatus.CREATED);

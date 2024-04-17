@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import javax.persistence.Transient;
+import javax.validation.constraints.PositiveOrZero;
 
 @Entity
 @JsonPropertyOrder({"id", "name", "rewardPoints", "totalPurchases"})
@@ -23,6 +24,7 @@ public class Customer {
 
 	@Id
 	@GeneratedValue
+	@PositiveOrZero(message = "ID must be a non-negative value")
 	private int id; // Using int ideally should use long
 
 	private String name;
@@ -87,7 +89,11 @@ public class Customer {
 		return transactions.stream().mapToDouble(CustomerTransaction::getTotal).sum();
 	}
 
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	public Map<String, Long> getMonthlyRewards() {
+		if (transactions == null) {
+			return null; // Handle null transactions gracefully
+		}
     return transactions.stream().collect(Collectors.groupingBy(t-> Month.of(t.getSaveDate().getMonth() + 1).toString(),
 				Collectors.summingLong(CustomerTransaction::getPoints)));
 
