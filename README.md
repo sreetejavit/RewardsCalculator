@@ -1,5 +1,4 @@
-## Rewards-Calculator-RestSpring Boot Rewards Service APIful
-
+## Implementing Rewards Calculator using Spring Boot
 
 This is a Spring Boot application implementing a rewards service API. It allows you to manage customers and their transactions, calculating reward points based on a defined reward structure.
 
