@@ -41,9 +41,6 @@ public class RewardsServiceMockTest {
 	@Test
 	public void testGetPoints_Between50and100() {
 		CustomerTransaction transaction = new CustomerTransaction(1, null, 75.0, "Purchase 2", new java.util.Date());
-		// Set transaction total between 50 and 100
-//		when(transaction.getTotal()).thenReturn(75.0);
-
 		// Call getPoints and assert
 		int points = transaction.getPoints();
 		assertEquals(25, points, "Points should be 25 for transaction between $50 and $100");
@@ -62,7 +59,6 @@ public class RewardsServiceMockTest {
 	public void testGetPoints_WithDecimalPoints() {
 		CustomerTransaction transaction = new CustomerTransaction(1, null, 224.69, "Purchase 2", new java.util.Date());
 
-		// Call getPoints and assert (modify assertion based on your complex calculation)
 		int points = transaction.getPoints();
 		assertEquals(298, points, "Points should be calculated correctly for complex scenario"); // Adjust assertion value
 	}

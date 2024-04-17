@@ -21,4 +21,8 @@ public class RewardsService {
 	public Optional<Customer> getCustomerById(Integer customerId) {
 		return customerRepository.findById(customerId);
 	}
+
+	public Customer saveCustomer(Customer customer) {
+		return customerRepository.save(customer);
+	}
 }
