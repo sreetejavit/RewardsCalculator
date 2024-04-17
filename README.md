@@ -22,14 +22,22 @@ This is a Spring Boot application implementing a rewards service API. It allows 
   - If you don't have Java installed, you can download it from https://www.oracle.com/java/technologies/javase-jdk11-downloads.html.
 - Run mvn clean install (or your preferred build command) to build the project.
 - Run the application using java -jar target/rewards-calculator-0.0.1-SNAPSHOT.jar (replace the filename with the actual generated JAR file name).
-- From Browser or Postman connect to http://localhost:8080/api/v1/rewards/customers
-- From Browser or Postman connect to http://localhost:8080/api/v1/rewards/customers/{id}
+- From Browser or Postman GET http://localhost:8080/api/v1/rewards/customers
+- From Browser or Postman GET http://localhost:8080/api/v1/rewards/customers/{id}
+- From Browser or Postman POST http://localhost:8080/api/v1/rewards/customers with JSON body:
+```json
+{
+    "name": "John Doe",
+    "id": 1003
+}
+```
 
 ### API Endpoints:
 | Endpoint                       | Method | Description                          |
 |--------------------------------|--------|--------------------------------------|
 | /api/v1/rewards/customers      | Get    | Retrieves a list of all customers.   |
 | /api/v1/rewards/customers/{id} | Get    | Retrieves a specific customer by ID. |
+| /api/v1/rewards/customers      | Post   | Adds a new customers.                |
 
 ### Response Codes:
 | Code             | Description                          |
